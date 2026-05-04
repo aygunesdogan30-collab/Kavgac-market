@@ -1,60 +1,48 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { background-color: #0f0f0f; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; }
-        .header { background: linear-gradient(45deg, #f39c12, #d35400); padding: 20px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .header h1 { margin: 0; font-size: 24px; text-shadow: 2px 2px 4px #000; }
-        .card { background: #1a1a1a; border: 2px solid #333; border-radius: 15px; padding: 15px; margin-bottom: 15px; position: relative; border-left: 5px solid #f39c12; }
-        .price { font-size: 22px; color: #f1c40f; font-weight: bold; margin: 10px 0; }
-        .btn { background: #f39c12; color: black; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; }
-        .btn:active { transform: scale(0.98); background: #e67e22; }
-        .badge { background: #e74c3c; color: white; font-size: 10px; padding: 3px 10px; position: absolute; top: 10px; right: 10px; border-radius: 5px; font-weight: bold; }
+        body { background: #050505; color: white; font-family: 'Segoe UI', sans-serif; padding: 15px; margin: 0; }
+        .header { background: linear-gradient(135deg, #ffcc00, #ff8800); padding: 25px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(255, 136, 0, 0.3); }
+        .header h1 { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .item { background: #151515; border: 1px solid #222; border-radius: 18px; padding: 15px; position: relative; border-bottom: 4px solid #ff8800; }
+        .price { color: #ffcc00; font-weight: bold; font-size: 18px; margin: 8px 0; }
+        .buy-btn { background: #ff8800; color: black; border: none; padding: 10px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .buy-btn:active { transform: scale(0.9); }
+        .tag { position: absolute; top: -5px; right: -5px; background: red; color: white; font-size: 10px; padding: 4px 8px; border-radius: 8px; }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>⚔️ KAVGACI MARKET</h1>
-        <p>Güvenli Elmas Merkezi</p>
+        <h1>KAVGACI STORE</h1>
+        <p>Hızlı ve Güvenilir Elmas</p>
     </div>
 
-    <div class="card">
-        <h3>80 ELMAS</h3>
-        <div class="price">✨ 50 Yıldız</div>
-        <button class="btn" onclick="buy('80 Elmas')">SATIN AL</button>
-    </div>
-
-    <div class="card">
-        <div class="badge">POPÜLER</div>
-        <h3>170 ELMAS</h3>
-        <div class="price">✨ 100 Yıldız</div>
-        <button class="btn" onclick="buy('170 Elmas')">SATIN AL</button>
-    </div>
-
-    <div class="card">
-        <h3>360 ELMAS</h3>
-        <div class="price">✨ 200 Yıldız</div>
-        <button class="btn" onclick="buy('360 Elmas')">SATIN AL</button>
-    </div>
-
-    <div class="card">
-        <div class="badge">AVANTAJ</div>
-        <h3>950 ELMAS</h3>
-        <div class="price">✨ 500 Yıldız</div>
-        <button class="btn" onclick="buy('950 Elmas')">SATIN AL</button>
+    <div class="grid">
+        <div class="item"><h3>30 ELMAS</h3><div class="price">25 TL</div><button class="buy-btn" onclick="order('30 Elmas')">AL</button></div>
+        <div class="item"><span class="tag">POPÜLER</span><h3>80 ELMAS</h3><div class="price">60 TL</div><button class="buy-btn" onclick="order('80 Elmas')">AL</button></div>
+        <div class="item"><h3>170 ELMAS</h3><div class="price">120 TL</div><button class="buy-btn" onclick="order('170 Elmas')">AL</button></div>
+        <div class="item"><span class="tag">FIRSAT</span><h3>360 ELMAS</h3><div class="price">240 TL</div><button class="buy-btn" onclick="order('360 Elmas')">AL</button></div>
+        <div class="item"><h3>950 ELMAS</h3><div class="price">550 TL</div><button class="buy-btn" onclick="order('950 Elmas')">AL</button></div>
+        <div class="item"><span class="tag">KRAL</span><h3>2000 ELMAS</h3><div class="price">1100 TL</div><button class="buy-btn" onclick="order('2000 Elmas')">AL</button></div>
     </div>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        function buy(item) {
-            tg.showConfirm(item + " satın almak istiyor musun kanka?", function(ok) {
-                if(ok) tg.showAlert("✅ Siparişiniz sıraya alındı!");
+        function order(val) {
+            tg.showConfirm(val + " paketini almak istiyor musun?", function(ok) {
+                if(ok) {
+                    tg.sendData(val); // Siparişi bota yollar
+                    tg.close();
+                }
             });
         }
     </script>
 </body>
-</
+</html>
+
